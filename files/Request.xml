@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GetCourseDetailsRequest xxmlns="http://ericsoares.com/courses">
-	<id>123</id>
+<GetCourseDetailsRequest
+	xmlns="http://ericsoares.com/courses"
+	xsi:schemaLocation="http://ericsoares.com/courses course-details.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	>
+	<id>ABC</id>
 </GetCourseDetailsRequest>
+
+<!-- xxmlns="http://ericsoares.com/courses" LINHA GERADA AUTOMATICAMENTE  ALTERE ELA POR ESSA ABAIXO -->
