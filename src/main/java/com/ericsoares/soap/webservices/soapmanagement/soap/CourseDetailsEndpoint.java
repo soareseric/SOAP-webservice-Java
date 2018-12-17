@@ -16,6 +16,7 @@ import com.ericsoares.courses.GetAllCourseDetailsResponse;
 import com.ericsoares.courses.GetCourseDetailsRequest;
 import com.ericsoares.courses.GetCourseDetailsResponse;
 import com.ericsoares.soap.webservices.soapmanagement.soap.bean.Course;
+import com.ericsoares.soap.webservices.soapmanagement.soap.exceptions.CourseNotFoundException;
 import com.ericsoares.soap.webservices.soapmanagement.soap.services.CourseDetailsService;
 import com.ericsoares.soap.webservices.soapmanagement.soap.services.CourseDetailsService.Status;
 
@@ -35,6 +36,9 @@ public class CourseDetailsEndpoint {
 
 		Course course = service.findById(request.getId());
 
+		if(course == null)
+			throw new CourseNotFoundException("Invalid Course Id" + request.getId());
+		
 		return mapCourseDetails(course);
 	}
 
