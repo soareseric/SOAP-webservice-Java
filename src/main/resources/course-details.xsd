@@ -53,9 +53,16 @@
 		<xs:complexType>
 			<xs:sequence>
 				<!-- 1 is success and 0 is for fail -->
-				<xs:element name="status" type="xs:int" />
+				<xs:element name="status" type="tns:Status" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	
+	<xs:simpleType name="Status">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"></xs:enumeration>
+			<xs:enumeration value="FAILURE"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 
 </xs:schema>

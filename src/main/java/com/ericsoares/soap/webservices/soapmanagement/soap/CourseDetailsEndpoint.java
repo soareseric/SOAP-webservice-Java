@@ -17,6 +17,7 @@ import com.ericsoares.courses.GetCourseDetailsRequest;
 import com.ericsoares.courses.GetCourseDetailsResponse;
 import com.ericsoares.soap.webservices.soapmanagement.soap.bean.Course;
 import com.ericsoares.soap.webservices.soapmanagement.soap.services.CourseDetailsService;
+import com.ericsoares.soap.webservices.soapmanagement.soap.services.CourseDetailsService.Status;
 
 @Endpoint
 public class CourseDetailsEndpoint {
@@ -72,7 +73,7 @@ public class CourseDetailsEndpoint {
 
 		List<Course> courses = service.findAll();
 
-		return mapAllCourseDetails(courses);
+		return mapAllCourseDetails(courses);	
 	}
 	
 	@PayloadRoot(namespace = "http://ericsoares.com/courses", localPart = "DeleteCourseDetailsRequest")
@@ -80,10 +81,16 @@ public class CourseDetailsEndpoint {
 	public 	DeleteCourseDetailsResponse deleteCourseDetailsRequest(
 			@RequestPayload DeleteCourseDetailsRequest request) {
 
-		int status = service.deleteById(request.getId());
+		Status status = service.deleteById(request.getId());
 
 		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
-		response.setStatus(status);
+		response.setStatus(mapStatus(status));
 		return response;
+	}
+
+	private com.ericsoares.courses.Status mapStatus(Status status) {
+		if(status == Status.FAILURE)
+			return com.ericsoares.courses.Status.FAILURE;
+		return com.ericsoares.courses.Status.SUCCESS;
 	}
 }
